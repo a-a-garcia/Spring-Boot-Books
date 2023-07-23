@@ -19,9 +19,10 @@ public class BooksController {
     }
     
     @RequestMapping("/books")
-    public List<Book> index() { //eventuall ywill be return type string for rendering jsp page
-        return bookService.allBooks();
-        //return "index.jsp"
+    public String index(Model model) { 
+    	List<Book> allBooks = bookService.allBooks();
+    	model.addAttribute("allBooks", allBooks); //remember model takes two params -1) what it will be referred to in the jsp, 2) what it's called via Service.
+        return "index.jsp";
     }
     
     @RequestMapping(value="/books/create", method=RequestMethod.POST)
